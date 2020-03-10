@@ -2,7 +2,7 @@ package com.company;
 
 public class Helicopter extends Vehicle {
 
-    int rocketDMG;
+    private int rocketDMG;
 
     public int getRocketDMG() {
         return rocketDMG;
@@ -12,12 +12,18 @@ public class Helicopter extends Vehicle {
         this.rocketDMG = rocketDMG;
     }
 
-    public Helicopter(int hp, int cost, int dps, int armor, int rocketDMG) {
-        super(hp, cost, dps, armor);
+    public Helicopter(String name, int hp, int cost, int dps, int armor, int rocketDMG) {
+        super(name, hp, cost, dps, armor);
         this.rocketDMG = rocketDMG;
     }
 
     public void RocketBarrage() {
         setDps(getDps() * rocketDMG);
+    }
+
+    @Override
+    public void ShowInfo() {
+        super.ShowInfo();
+        System.out.println("Rocket DMG = " + getRocketDMG());
     }
 }

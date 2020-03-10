@@ -1,15 +1,19 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vehicle extends  AbstractUnit {
 
-    int armor;
-    List<Soldier> soldiers;
+    protected int armor;
+    protected List<Soldier> soldiers = new ArrayList<Soldier>();
 
-    public Vehicle(int hp, int cost, int dps, int armor) {
-        super(hp, cost, dps);
+    public Vehicle(String name, int hp, int cost, int dps, int armor) {
+        super(name, hp, cost, dps);
         this.armor = armor;
+    }
+
+    public Vehicle() {
     }
 
     public int getArmor() {
@@ -21,11 +25,28 @@ public class Vehicle extends  AbstractUnit {
     }
 
     public List<Soldier> getSoldiers() {
-        return soldiers;
+        if (soldiers.isEmpty())
+            return null;
+        else
+            return soldiers;
+    }
+
+    public int getSoldiersAmount() {
+        if (soldiers.isEmpty()) {
+            return 0;
+        }
+        else return soldiers.size();
     }
 
     public void addSoldier(Soldier soldier) {
         soldiers.add(soldier);
+    }
+
+    @Override
+    public void ShowInfo() {
+        super.ShowInfo();
+        System.out.println("Armor = " + getArmor());
+        System.out.println("Soldiers in vehicle = " + getSoldiersAmount());
     }
 
 }

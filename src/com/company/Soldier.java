@@ -4,9 +4,12 @@ public class Soldier extends AbstractUnit {
 
     protected int stamina;
 
-    public Soldier(int hp, int cost, int dps, int stamina) {
-        super(hp, cost, dps);
+    public Soldier(String name, int hp, int cost, int dps, int stamina) {
+        super(name, hp, cost, dps);
         this.stamina = stamina;
+    }
+
+    public Soldier() {
     }
 
     public int getStamina() {
@@ -15,5 +18,12 @@ public class Soldier extends AbstractUnit {
 
     public void setStamina(int stamina) {
         this.stamina = stamina;
+    }
+
+    @Override
+    public void ShowInfo() {
+        super.ShowInfo();
+        System.out.println("Stamina = " + getStamina());
+
     }
 }

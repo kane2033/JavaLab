@@ -2,10 +2,10 @@ package com.company;
 
 public class Scavenger extends Soldier {
 
-    int lootModifier;
+    private int lootModifier;
 
-    public Scavenger(int hp, int cost, int dps, int stamina, int lootModifier) {
-        super(hp, cost, dps, stamina);
+    public Scavenger(String name, int hp, int cost, int dps, int stamina, int lootModifier) {
+        super(name, hp, cost, dps, stamina);
         this.lootModifier = lootModifier;
     }
 
@@ -20,4 +20,11 @@ public class Scavenger extends Soldier {
     public void Loot(AbstractUnit unit) {
         this.setDps(this.getDps() + lootModifier);
     }
+
+    @Override
+    public void ShowInfo() {
+        super.ShowInfo();
+        System.out.println("Loot Modifier = " + getLootModifier());
+    }
+
 }

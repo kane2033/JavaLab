@@ -2,11 +2,11 @@ package com.company;
 
 public class Commander extends Soldier {
 
-    int hpBuff;
-    int dpsBuff;
+    private int hpBuff;
+    private int dpsBuff;
 
-    public Commander(int hp, int cost, int dps, int stamina, int hpBuff, int dpsBuff) {
-        super(hp, cost, dps, stamina);
+    public Commander(String name, int hp, int cost, int dps, int stamina, int hpBuff, int dpsBuff) {
+        super(name, hp, cost, dps, stamina);
         this.hpBuff = hpBuff;
         this.dpsBuff = dpsBuff;
     }
@@ -30,5 +30,11 @@ public class Commander extends Soldier {
     public void Buff(AbstractUnit unit) {
         unit.setHp(unit.getHp() + hpBuff);
         unit.setDps(unit.getDps() + dpsBuff);
+    }
+
+    @Override
+    public void ShowInfo() {
+        super.ShowInfo();
+        System.out.println("HP Buff = " + getHpBuff() + ", DPS Buff = " + getDpsBuff());
     }
 }
