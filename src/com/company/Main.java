@@ -1,5 +1,9 @@
 package com.company;
 
+import com.company.decorator.*;
+import com.company.factoryMethod.*;
+import com.company.hierarchy.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -7,44 +11,38 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main {
 
     public static void main(String[] args) {
-        List<AbstractUnit> units = new ArrayList<AbstractUnit>();
-        int classesAmount = 4;
-        int unitsAmount = 2;
-        int min_mod = 0;
-        int max_mod = 15;
-        int random = 0;
-        int randomMod = 0;
+        List<AbstractUnit> units = new ArrayList<>();
+        int classesAmount = 4; //количество вариантов
+        int unitsAmount = 2; //количество производимых юнитов
         for (int i = 0; i < unitsAmount; i++) {
-            random = ThreadLocalRandom.current().nextInt(0, classesAmount);
-            randomMod = ThreadLocalRandom.current().nextInt(min_mod, max_mod);
-            System.out.println(random + "; " + randomMod);
+            int random = ThreadLocalRandom.current().nextInt(0, classesAmount);
+            RUSArmyFactory rusFactory = new RUSArmyFactory();
+            USArmyFactory usFactory = new USArmyFactory();
+
             switch (random) {
                 case (0):
-                    Soldier commander = new Commander("Commander A", 25 + randomMod, 20 + randomMod,
-                            5 + randomMod, 5 + randomMod, 5 + randomMod, 5 + randomMod);
-                    commander = new EmpoweredAmmo(commander);
-                    units.add(commander);
+                    //(можно ли пользоваться явным преобразованием?)
+                    Soldier rusCommander = (Soldier)rusFactory.createUnit(UnitType.COMMANDER); //создаем фабричным методом
+                    rusCommander = new EmpoweredAmmo(rusCommander); //декорируем
+                    units.add(rusCommander); //добавляем
                     break;
                 case (1):
-                    Soldier scavenger = new Scavenger("Scavenger A", 30 + randomMod, 15 + randomMod,
-                            10 + randomMod, 10 + randomMod, 2 + randomMod);
-                    scavenger = new StaminaBooster(scavenger);
-                    units.add(scavenger);
+                    Soldier usScavenger = (Soldier)usFactory.createUnit(UnitType.SCAVENGER);
+                    usScavenger = new StaminaBooster(usScavenger);
+                    units.add(usScavenger);
                     break;
                 case(2):
-                    Vehicle helicopter = new Helicopter("Helicopter A", 60 + randomMod,
-                            40 + randomMod, 15 + randomMod, 20 + randomMod, 2 + randomMod);
-                    helicopter = new TitanicArmor(helicopter);
-                    units.add(helicopter);
+                    Vehicle rusHelicopter = (Vehicle)rusFactory.createUnit(UnitType.HELICOPTER);
+                    rusHelicopter = new TitanicArmor(rusHelicopter);
+                    units.add(rusHelicopter);
                     break;
                 case(3):
-                    Vehicle medicalStation = new MedicalStation("Med Station A", 35 + randomMod,
-                            40 + randomMod, 2 + randomMod, 10 + randomMod, 15 + randomMod);
-                    units.add(medicalStation);
+                    Vehicle usMedicalStation = (Vehicle)usFactory.createUnit(UnitType.MEDICAL_STATION);
+                    units.add(usMedicalStation);
                     break;
             }
         }
-        for (AbstractUnit unit:units) {
+        for (AbstractUnit unit:units) { //отображает всех сделанных юнитов
             unit.ShowInfo();
             System.out.println();
         }

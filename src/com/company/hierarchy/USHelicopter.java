@@ -1,6 +1,7 @@
-package com.company;
+package com.company.hierarchy;
 
-public class Helicopter extends Vehicle {
+//Американский вертолет при атаке ракетами только атакует ракетами (без доп. эффектов)
+public class USHelicopter extends Vehicle {
 
     private int rocketDMG;
 
@@ -12,7 +13,7 @@ public class Helicopter extends Vehicle {
         this.rocketDMG = rocketDMG;
     }
 
-    public Helicopter(String name, int hp, int cost, int dps, int armor, int rocketDMG) {
+    public USHelicopter(String name, int hp, int cost, int dps, int armor, int rocketDMG) {
         super(name, hp, cost, dps, armor);
         this.rocketDMG = rocketDMG;
     }

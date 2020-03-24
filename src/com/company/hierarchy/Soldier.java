@@ -1,8 +1,8 @@
-package com.company;
+package com.company.hierarchy;
 
 public class Soldier extends AbstractUnit {
 
-    protected int stamina;
+    private int stamina;
 
     public Soldier(String name, int hp, int cost, int dps, int stamina) {
         super(name, hp, cost, dps);

@@ -1,4 +1,6 @@
-package com.company;
+package com.company.decorator;
+
+import com.company.hierarchy.Vehicle;
 
 public class TitanicArmor extends VehicleDecorator {
 

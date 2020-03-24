@@ -1,12 +1,12 @@
-package com.company;
+package com.company.hierarchy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vehicle extends  AbstractUnit {
 
-    protected int armor;
-    protected List<Soldier> soldiers = new ArrayList<Soldier>();
+    private int armor;
+    private List<Soldier> soldiers = new ArrayList<>();
 
     public Vehicle(String name, int hp, int cost, int dps, int armor) {
         super(name, hp, cost, dps);

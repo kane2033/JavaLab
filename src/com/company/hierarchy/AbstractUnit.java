@@ -1,20 +1,20 @@
-package com.company;
+package com.company.hierarchy;
 
 public abstract class AbstractUnit {
 
-    protected String name;
-    protected int hp;
-    protected int cost;
-    protected int dps;
+    private String name = "Unit";
+    private int hp = 1;
+    private int cost = 1;
+    private int dps = 1;
 
-    public AbstractUnit(String name, int hp, int cost, int dps) {
+    AbstractUnit(String name, int hp, int cost, int dps) {
         this.name = name;
         this.hp = hp;
         this.cost = cost;
         this.dps = dps;
     }
 
-    protected AbstractUnit() {
+    AbstractUnit() {
     }
 
     public String getName() {

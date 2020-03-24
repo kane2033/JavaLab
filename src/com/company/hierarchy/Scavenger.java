@@ -1,4 +1,4 @@
-package com.company;
+package com.company.hierarchy;
 
 public class Scavenger extends Soldier {
 

@@ -1,4 +1,6 @@
-package com.company;
+package com.company.decorator;
+
+import com.company.hierarchy.Soldier;
 
 public class StaminaBooster extends  SoldierDecorator {
 
