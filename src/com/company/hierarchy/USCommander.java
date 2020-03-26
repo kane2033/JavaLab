@@ -1,12 +1,15 @@
 package com.company.hierarchy;
 
+import com.company.abstractFactory.components.Grenade;
+import com.company.abstractFactory.components.Weapon;
+
 // Американский командир может увеличивать урон
 public class USCommander extends Soldier {
 
     private int dpsBuff;
 
-    public USCommander(String name, int hp, int cost, int dps, int stamina, int dpsBuff) {
-        super(name, hp, cost, dps, stamina);
+    public USCommander(String name, int hp, int cost, int dps, int stamina, int dpsBuff, Weapon weapon, Grenade grenade) {
+        super(name, hp, cost, dps, stamina, weapon, grenade);
         this.dpsBuff = dpsBuff;
     }
 

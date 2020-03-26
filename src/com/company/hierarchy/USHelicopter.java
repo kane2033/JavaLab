@@ -1,5 +1,8 @@
 package com.company.hierarchy;
 
+import com.company.abstractFactory.components.Fuel;
+import com.company.abstractFactory.components.Weapon;
+
 //Американский вертолет при атаке ракетами только атакует ракетами (без доп. эффектов)
 public class USHelicopter extends Vehicle {
 
@@ -13,8 +16,8 @@ public class USHelicopter extends Vehicle {
         this.rocketDMG = rocketDMG;
     }
 
-    public USHelicopter(String name, int hp, int cost, int dps, int armor, int rocketDMG) {
-        super(name, hp, cost, dps, armor);
+    public USHelicopter(String name, int hp, int cost, int dps, int armor, int rocketDMG, Weapon weapon, Fuel fuel) {
+        super(name, hp, cost, dps, armor, weapon, fuel);
         this.rocketDMG = rocketDMG;
     }
 

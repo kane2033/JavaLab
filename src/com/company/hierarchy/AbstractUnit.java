@@ -1,17 +1,21 @@
 package com.company.hierarchy;
 
+import com.company.abstractFactory.components.Weapon;
+
 public abstract class AbstractUnit {
 
     private String name = "Unit";
     private int hp = 1;
     private int cost = 1;
     private int dps = 1;
+    private Weapon weapon = null;
 
-    AbstractUnit(String name, int hp, int cost, int dps) {
+    AbstractUnit(String name, int hp, int cost, int dps, Weapon weapon) {
         this.name = name;
         this.hp = hp;
         this.cost = cost;
         this.dps = dps;
+        this.weapon = weapon;
     }
 
     AbstractUnit() {

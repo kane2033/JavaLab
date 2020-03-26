@@ -1,11 +1,14 @@
 package com.company.hierarchy;
 
+import com.company.abstractFactory.components.Grenade;
+import com.company.abstractFactory.components.Weapon;
+
 public class Scavenger extends Soldier {
 
     private int lootModifier;
 
-    public Scavenger(String name, int hp, int cost, int dps, int stamina, int lootModifier) {
-        super(name, hp, cost, dps, stamina);
+    public Scavenger(String name, int hp, int cost, int dps, int stamina, int lootModifier, Weapon weapon, Grenade grenade) {
+        super(name, hp, cost, dps, stamina, weapon, grenade);
         this.lootModifier = lootModifier;
     }
 

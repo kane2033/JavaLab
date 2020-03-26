@@ -23,6 +23,7 @@ public class Main {
                 case (0):
                     //(можно ли пользоваться явным преобразованием?)
                     Soldier rusCommander = (Soldier)rusFactory.createUnit(UnitType.COMMANDER); //создаем фабричным методом
+                    //в фабричном методе используется абстрактная фабрика
                     rusCommander = new EmpoweredAmmo(rusCommander); //декорируем
                     units.add(rusCommander); //добавляем
                     break;

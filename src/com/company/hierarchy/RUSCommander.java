@@ -1,12 +1,15 @@
 package com.company.hierarchy;
 
+import com.company.abstractFactory.components.Grenade;
+import com.company.abstractFactory.components.Weapon;
+
 // Русский командир может увеличивать здоровье
 public class RUSCommander extends Soldier {
 
     private int hpBuff;
 
-    public RUSCommander(String name, int hp, int cost, int dps, int stamina, int hpBuff) {
-        super(name, hp, cost, dps, stamina);
+    public RUSCommander(String name, int hp, int cost, int dps, int stamina, int hpBuff, Weapon weapon, Grenade grenade) {
+        super(name, hp, cost, dps, stamina, weapon, grenade);
         this.hpBuff = hpBuff;
     }
 

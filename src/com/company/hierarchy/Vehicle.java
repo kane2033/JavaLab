@@ -1,5 +1,8 @@
 package com.company.hierarchy;
 
+import com.company.abstractFactory.components.Fuel;
+import com.company.abstractFactory.components.Weapon;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +10,12 @@ public class Vehicle extends  AbstractUnit {
 
     private int armor;
     private List<Soldier> soldiers = new ArrayList<>();
+    private Fuel fuel;
 
-    public Vehicle(String name, int hp, int cost, int dps, int armor) {
-        super(name, hp, cost, dps);
+    public Vehicle(String name, int hp, int cost, int dps, int armor, Weapon weapon, Fuel fuel) {
+        super(name, hp, cost, dps, weapon);
         this.armor = armor;
+        this.fuel = fuel;
     }
 
     public Vehicle() {

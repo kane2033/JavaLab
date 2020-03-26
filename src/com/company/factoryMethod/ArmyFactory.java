@@ -1,10 +1,16 @@
 package com.company.factoryMethod;
 
+import com.company.abstractFactory.SoldierFactory;
+import com.company.abstractFactory.VehicleFactory;
 import com.company.hierarchy.AbstractUnit;
 
 public abstract class ArmyFactory {
 
+
     protected abstract AbstractUnit createUnit(UnitType type);
+
+    protected SoldierFactory soldierFactory;
+    protected VehicleFactory vehicleFactory;
 
     /**
      * Тут могут быть методы операций по созданию объектов

@@ -1,13 +1,16 @@
 package com.company.hierarchy;
 
+import com.company.abstractFactory.components.Fuel;
+import com.company.abstractFactory.components.Weapon;
+
 //Русский вертолет при атаке ракетами увеличивает себе броню
 public class RUSHelicopter extends Vehicle {
 
     private int rocketDMG;
     private int armorBuff;
 
-    public RUSHelicopter(String name, int hp, int cost, int dps, int armor, int rocketDMG, int armorBuff) {
-        super(name, hp, cost, dps, armor);
+    public RUSHelicopter(String name, int hp, int cost, int dps, int armor, int rocketDMG, int armorBuff, Weapon weapon, Fuel fuel) {
+        super(name, hp, cost, dps, armor, weapon, fuel);
         this.rocketDMG = rocketDMG;
         this.armorBuff = armorBuff;
     }

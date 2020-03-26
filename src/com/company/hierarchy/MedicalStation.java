@@ -1,11 +1,14 @@
 package com.company.hierarchy;
 
+import com.company.abstractFactory.components.Fuel;
+import com.company.abstractFactory.components.Weapon;
+
 public class MedicalStation extends Vehicle{
 
     private int healPower;
 
-    public MedicalStation(String name, int hp, int cost, int dps, int armor, int healPower) {
-        super(name, hp, cost, dps, armor);
+    public MedicalStation(String name, int hp, int cost, int dps, int armor, int healPower, Weapon weapon, Fuel fuel) {
+        super(name, hp, cost, dps, armor, weapon, fuel);
         this.healPower = healPower;
     }
 
