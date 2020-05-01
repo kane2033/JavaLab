@@ -7,45 +7,35 @@ import com.company.hierarchy.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
-    public static void main(String[] args) {
-        List<AbstractUnit> units = new ArrayList<>();
-        int classesAmount = 4; //количество вариантов
-        int unitsAmount = 2; //количество производимых юнитов
-        for (int i = 0; i < unitsAmount; i++) {
-            int random = ThreadLocalRandom.current().nextInt(0, classesAmount);
-            RUSArmyFactory rusFactory = new RUSArmyFactory();
-            USArmyFactory usFactory = new USArmyFactory();
+    static List<AbstractUnit> units = new ArrayList<>();
 
-            switch (random) {
-                case (0):
-                    //(можно ли пользоваться явным преобразованием?)
-                    Soldier rusCommander = (Soldier)rusFactory.createUnit(UnitType.COMMANDER); //создаем фабричным методом
-                    //в фабричном методе используется абстрактная фабрика
-                    rusCommander = new EmpoweredAmmo(rusCommander); //декорируем
-                    units.add(rusCommander); //добавляем
-                    break;
-                case (1):
-                    Soldier usScavenger = (Soldier)usFactory.createUnit(UnitType.SCAVENGER);
-                    usScavenger = new StaminaBooster(usScavenger);
-                    units.add(usScavenger);
-                    break;
-                case(2):
-                    Vehicle rusHelicopter = (Vehicle)rusFactory.createUnit(UnitType.HELICOPTER);
-                    rusHelicopter = new TitanicArmor(rusHelicopter);
-                    units.add(rusHelicopter);
-                    break;
-                case(3):
-                    Vehicle usMedicalStation = (Vehicle)usFactory.createUnit(UnitType.MEDICAL_STATION);
-                    units.add(usMedicalStation);
-                    break;
+    static ProducerThread producer;
+    static Thread consumerThread;
+
+    //метод потребителя
+    static Runnable consumer = new Runnable() {
+        public void run() {
+            System.out.println("Поток потребителя запущен, на старте юнитов:" + producer.getUnitsAmount());
+            while (producer.getUnitsAmount() > 0) {
+                try { //"потребление"
+                    units.add(producer.getUnit());
+                    Thread.sleep(2000);
+                }
+                catch (InterruptedException e) {
+                    System.out.println("Поток потребителя прерван");
+                }
             }
         }
-        for (AbstractUnit unit:units) { //отображает всех сделанных юнитов
-            unit.ShowInfo();
-            System.out.println();
-        }
+    };
+
+    public static void main(String[] args) {
+        producer = new ProducerThread();
+        consumerThread = new Thread(consumer);
+        consumerThread.start();
+        producer.start();
     }
 }
