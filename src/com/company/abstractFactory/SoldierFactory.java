@@ -7,4 +7,7 @@ import com.company.abstractFactory.components.Weapon;
 public interface SoldierFactory {
     Weapon addWeapon();
     Grenade addGrenade();
+    default SoldierEquipment makeEquipment() {
+        return new SoldierEquipment(addWeapon(), addGrenade());
+    }
 }
