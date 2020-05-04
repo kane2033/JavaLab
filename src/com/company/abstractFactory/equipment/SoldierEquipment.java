@@ -1,19 +1,12 @@
-package com.company.abstractFactory;
+package com.company.abstractFactory.equipment;
 
+import com.company.abstractFactory.builder.SoldierEquipmentBuilder;
 import com.company.abstractFactory.components.Grenade;
 import com.company.abstractFactory.components.Weapon;
 
-public class SoldierEquipment {
-    private Weapon weapon = null;
+//солдатам в снаряжение выдается граната
+public class SoldierEquipment extends Equipment {
     private Grenade grenade = null;
-
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
 
     public Grenade getGrenade() {
         return grenade;
@@ -24,12 +17,15 @@ public class SoldierEquipment {
     }
 
     public SoldierEquipment(Weapon weapon, Grenade grenade) {
-        this.weapon = weapon;
+        this.setWeapon(weapon);
         this.grenade = grenade;
     }
 
     public SoldierEquipment() {
 
     }
+
+    //статический класс строителя
+    public static SoldierEquipmentBuilder builder;
 
 }

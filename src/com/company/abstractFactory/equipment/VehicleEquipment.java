@@ -1,19 +1,12 @@
-package com.company.abstractFactory;
+package com.company.abstractFactory.equipment;
 
+import com.company.abstractFactory.builder.VehicleEquipmentBuilder;
 import com.company.abstractFactory.components.Fuel;
 import com.company.abstractFactory.components.Weapon;
 
-public class VehicleEquipment {
-    private Weapon weapon = null;
+//транспорту в снаряжение выдается топливо
+public class VehicleEquipment extends Equipment {
     private Fuel fuel = null;
-
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
 
     public Fuel getFuel() {
         return fuel;
@@ -24,11 +17,13 @@ public class VehicleEquipment {
     }
 
     public VehicleEquipment(Weapon weapon, Fuel fuel) {
-        this.weapon = weapon;
+        this.setWeapon(weapon);
         this.fuel = fuel;
     }
 
     public VehicleEquipment() {
 
     }
+
+    public static VehicleEquipmentBuilder builder;
 }

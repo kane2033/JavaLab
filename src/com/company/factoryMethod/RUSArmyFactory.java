@@ -1,6 +1,7 @@
 package com.company.factoryMethod;
 
 import com.company.abstractFactory.*;
+import com.company.abstractFactory.builder.RUSSoldierEquipmentBuilder;
 import com.company.hierarchy.*;
 
 //Русская фабрика отличается увеличенными характеристиками здоровья,
@@ -8,8 +9,9 @@ import com.company.hierarchy.*;
 public class RUSArmyFactory extends ArmyFactory {
 
     public RUSArmyFactory() {
-        soldierFactory = new RUSSoldierFactory();
-        vehicleFactory = new RUSVehicleFactory();
+        //soldierFactory = new RUSSoldierFactory(); -> заменено на строителя
+        soldierEquipment.builder = new RUSSoldierEquipmentBuilder(); //указывается, что нужно снаряжать русским вооружением
+        vehicleFactory = new RUSVehicleFactory(); //абстрактная фабрика
         createEquipment(); //создание обмундирования с помощью фабрик
     }
 

@@ -1,16 +1,16 @@
 package com.company.factoryMethod;
 
-import com.company.abstractFactory.USSoldierFactory;
 import com.company.abstractFactory.USVehicleFactory;
+import com.company.abstractFactory.builder.USSoldierEquipmentBuilder;
 import com.company.hierarchy.*;
 
 //Американская фабрика отличается высокими показателями урона
 public class USArmyFactory extends ArmyFactory {
 
     public USArmyFactory() {
-        soldierFactory = new USSoldierFactory();
-        vehicleFactory = new USVehicleFactory();
-        createEquipment();
+        soldierEquipment.builder = new USSoldierEquipmentBuilder(); //указывается, что надо выдать американское снаряжение
+        vehicleFactory = new USVehicleFactory(); //абстрактная фабрика
+        createEquipment(); //создание вооружения
     }
 
     @Override

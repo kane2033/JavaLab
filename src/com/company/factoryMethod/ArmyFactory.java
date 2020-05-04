@@ -1,25 +1,25 @@
 package com.company.factoryMethod;
 
-import com.company.abstractFactory.SoldierEquipment;
-import com.company.abstractFactory.SoldierFactory;
-import com.company.abstractFactory.VehicleEquipment;
+import com.company.abstractFactory.equipment.SoldierEquipment;
+import com.company.abstractFactory.equipment.VehicleEquipment;
 import com.company.abstractFactory.VehicleFactory;
 import com.company.hierarchy.AbstractUnit;
 
 public abstract class ArmyFactory {
 
-
     protected abstract AbstractUnit createUnit(UnitType type);
 
-    protected SoldierFactory soldierFactory;
+    //protected SoldierFactory soldierFactory; -> заменено на строителя
     protected VehicleFactory vehicleFactory;
     protected SoldierEquipment soldierEquipment;
     protected VehicleEquipment vehicleEquipment;
 
     protected void createEquipment() {
         //снаряжение в соответствие со страной
+        //soldierEquipment = soldierFactory.makeEquipment(); -> заменено на строителя
+        //статический класс строителя в классе снаряжения выдает оружие и гранату
+        soldierEquipment = (SoldierEquipment) new SoldierEquipment().builder.withWeapon().withGrenade().build();
         //применение абстрактной фабрики
-        soldierEquipment = soldierFactory.makeEquipment();
         vehicleEquipment = vehicleFactory.makeEquipment();
     }
 
