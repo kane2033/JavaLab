@@ -1,41 +1,20 @@
 package com.company;
 
-import com.company.decorator.*;
-import com.company.factoryMethod.*;
-import com.company.hierarchy.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicInteger;
+import com.company.threads.ConsumerThread;
+import com.company.threads.ProducerThread;
+import com.company.threads.UnitsStorage;
 
 public class Main {
 
-    static List<AbstractUnit> units = new ArrayList<>();
-
     static ProducerThread producer;
-    static Thread consumerThread;
-
-    //метод потребителя
-    static Runnable consumer = new Runnable() {
-        public void run() {
-            System.out.println("Поток потребителя запущен, на старте юнитов:" + producer.getUnitsAmount());
-            while (producer.getUnitsAmount() > 0) {
-                try { //"потребление"
-                    units.add(producer.getUnit());
-                    Thread.sleep(2000);
-                }
-                catch (InterruptedException e) {
-                    System.out.println("Поток потребителя прерван");
-                }
-            }
-        }
-    };
+    static ConsumerThread consumer;
+    static UnitsStorage storage;
 
     public static void main(String[] args) {
-        producer = new ProducerThread();
-        consumerThread = new Thread(consumer);
-        consumerThread.start();
+        storage = new UnitsStorage(50);
+        producer = new ProducerThread(storage);
+        consumer = new ConsumerThread(storage);
         producer.start();
+        consumer.start();
     }
 }

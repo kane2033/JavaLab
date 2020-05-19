@@ -1,4 +1,4 @@
-package com.company;
+package com.company.threads;
 
 import com.company.decorator.EmpoweredAmmo;
 import com.company.decorator.StaminaBooster;
@@ -10,36 +10,19 @@ import com.company.hierarchy.AbstractUnit;
 import com.company.hierarchy.Soldier;
 import com.company.hierarchy.Vehicle;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProducerThread extends Thread {
 
-    private Stack<AbstractUnit> units = new Stack<>();
-
+    //фабрики для создания юнита
     private RUSArmyFactory rusFactory = new RUSArmyFactory();
     private USArmyFactory usFactory = new USArmyFactory();
 
-    private AtomicInteger unitsAmount = new AtomicInteger(0);
+    private UnitsStorage storage; //хранилище, в которое будем класть юниты
 
-    public int getUnitsAmount() {
-        return unitsAmount.get();
-    }
-
-    public int decrementUnitsAmount() {
-        return unitsAmount.decrementAndGet();
-    }
-
-    public AbstractUnit getUnit() {
-        System.out.println("Минус юнит, количество: " + decrementUnitsAmount());
-        return units.pop();
-    }
-
-    public ProducerThread() {
+    public ProducerThread(UnitsStorage storage) {
         super("Поток производителя"); //название потока
+        this.storage = storage;
     }
 
     //создает случайного юнита и добавляет в список
@@ -74,29 +57,12 @@ public class ProducerThread extends Thread {
         return unit;
     }
 
-
+    @Override
     public void run() {
         System.out.println("Поток производителя запущен");
 
-        //создание первого юнита
-        AbstractUnit newUnit = createRandomUnit();
-        units.push(newUnit);
-        unitsAmount.addAndGet(1);
-
-        while (unitsAmount.get() > 0) {
-            try { //создание случайного юнита
-                newUnit = createRandomUnit();
-                units.push(newUnit);
-
-                System.out.println("Юнитов произведено на данный момент: " + unitsAmount.addAndGet(1));
-                //newUnit.ShowInfo();
-
-                Thread.sleep(1000);
-            }
-            catch (InterruptedException e) {
-                System.out.println("Поток производителя прерван");
-            }
+        while (true) { //бесконечно создает юниты и кладет на склад
+            storage.put(createRandomUnit());
         }
-
     }
 }
